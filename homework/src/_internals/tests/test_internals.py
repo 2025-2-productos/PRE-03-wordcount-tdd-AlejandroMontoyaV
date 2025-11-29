@@ -1,3 +1,5 @@
+import os
+import shutil
 import subprocess
 import sys
 
@@ -6,6 +8,7 @@ from ..count_words import count_words
 from ..preprocess_lines import preprocess_lines
 from ..read_all_lines import read_all_lines
 from ..split_into_words import split_into_words
+from ..write_word_counts import write_word_counts
 
 
 # Función test_parse_args
@@ -58,3 +61,24 @@ def test_count_words():
     assert counter["hello"] == 2
     assert counter["world"] == 1
     assert counter["test"] == 1
+
+
+# Funcón test_write_word_counts
+def test_write_word_counts():
+    output_folder = "data/output/"
+    word_counts = {"hello": 2, "world": 1, "python": 1}
+
+    if os.path.exists(output_folder):
+        shutil.rmtree(output_folder)
+
+    write_word_counts(output_folder, word_counts)
+
+    output_file = os.path.join(output_folder, "wordcount.tsv")
+    assert os.path.exists(output_file), "Output file was not created"
+
+    with open(output_file, "r", encoding="utf-8") as f:
+        lines = f.readlines()
+
+    assert lines == ["hello\t2\n", "world\t1\n", "python\t1\n"]
+
+    shutil.rmtree(output_folder)
