@@ -2,6 +2,7 @@
 
 import os
 import subprocess
+import sys
 
 
 def test_homework():
@@ -21,7 +22,7 @@ def test_homework():
 
     try:
         subprocess.run(
-            ["python3", "-m", "homework", "data/input", "data/output"],
+            [sys.executable, "-m", "homework", "data/input", "data/output"],
             check=True,
         )
     except subprocess.CalledProcessError as e:
