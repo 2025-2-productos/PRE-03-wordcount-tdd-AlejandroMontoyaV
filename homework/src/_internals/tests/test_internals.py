@@ -71,7 +71,7 @@ def test_write_word_counts():
     if os.path.exists(output_folder):
         shutil.rmtree(output_folder)
 
-    write_word_counts(output_folder, word_counts)
+    write_word_counts(word_counts, output_folder)
 
     output_file = os.path.join(output_folder, "wordcount.tsv")
     assert os.path.exists(output_file), "Output file was not created"
