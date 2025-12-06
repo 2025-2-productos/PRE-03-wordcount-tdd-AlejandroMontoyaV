@@ -2,6 +2,7 @@ import os
 
 
 def read_all_lines(input_folder):
+    # read all lines from all files in the input folder
     all_lines = []
     input_files_list = os.listdir(input_folder)
     for filename in input_files_list:
